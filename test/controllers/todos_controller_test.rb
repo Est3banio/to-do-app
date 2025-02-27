@@ -1,0 +1,52 @@
+require "test_helper"
+
+class TodosControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  
+  setup do
+    @todo = todos(:one)
+    @user = users(:one)
+    sign_in @user
+  end
+
+  test "should get index" do
+    get todos_url
+    assert_response :success
+  end
+
+  test "should get new" do
+    get new_todo_url
+    assert_response :success
+  end
+
+  test "should create todo" do
+    assert_difference("Todo.count") do
+      post todos_url, params: { todo: { completed: @todo.completed, title: @todo.title, user_id: @user.id } }
+    end
+
+    assert_redirected_to todos_url
+  end
+
+  test "should show todo" do
+    get todo_url(@todo)
+    assert_response :success
+  end
+
+  test "should get edit" do
+    get edit_todo_url(@todo)
+    assert_response :success
+  end
+
+  test "should update todo" do
+    patch todo_url(@todo), params: { todo: { completed: @todo.completed, title: @todo.title } }
+    assert_redirected_to todos_url
+  end
+
+  test "should destroy todo" do
+    assert_difference("Todo.count", -1) do
+      delete todo_url(@todo)
+    end
+
+    assert_redirected_to todos_url
+  end
+end

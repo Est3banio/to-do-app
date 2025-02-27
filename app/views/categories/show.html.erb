@@ -1,0 +1,10 @@
+<h1>Category: <%= @category.name %></h1>
+
+<% if @category.color.present? %>
+  <p>Color: <span style="color: <%= @category.color %>"><%= @category.color %></span></p>
+<% end %>
+
+<div>
+  <%= link_to "Edit", edit_category_path(@category) %> |
+  <%= link_to "Back", categories_path %>
+</div>

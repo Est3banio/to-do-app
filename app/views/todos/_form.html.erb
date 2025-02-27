@@ -1,0 +1,48 @@
+<%= form_with(model: todo, class: "contents") do |form| %>
+  <% if todo.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% todo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :title, class: "block font-medium mb-1" %>
+    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-1 w-full", {"border-gray-300 focus:outline-blue-600": todo.errors[:title].none?, "border-red-400 focus:outline-red-600": todo.errors[:title].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :categories, class: "block font-medium mb-1" %>
+    <div class="mt-1 border border-gray-300 rounded-md p-3 max-h-48 overflow-y-auto">
+      <% if @categories.any? %>
+        <div class="grid grid-cols-1 gap-2">
+          <% @categories.each do |category| %>
+            <div class="flex items-center">
+              <%= check_box_tag "todo[category_ids][]", category.id, todo.category_ids.include?(category.id), id: dom_id(category), class: "h-4 w-4 text-blue-600 rounded mr-2" %>
+              <label for="<%= dom_id(category) %>" class="flex items-center cursor-pointer">
+                <div class="h-3 w-3 rounded-full bg-<%= category.color %> mr-2"></div>
+                <%= category.name %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-gray-500 text-sm">No categories available. <a href="/categories/new" class="text-blue-600 hover:underline">Create one</a></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="my-5 flex items-center gap-2">
+    <%= form.label :completed, class: "font-medium" %>
+    <%= form.check_box :completed, class: ["shadow-sm rounded border order-first h-5 w-5", {"border-gray-300 focus:outline-blue-600": todo.errors[:completed].none?, "border-red-400 focus:outline-red-600": todo.errors[:completed].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
