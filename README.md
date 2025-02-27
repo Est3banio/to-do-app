@@ -1,3 +1,5 @@
+![BanioBits](https://www.baniobits.dev/BanioBits.png)
+
 # Task Manager App
 
 A modern and intuitive to-do application built with Ruby on Rails, allowing users to manage their tasks and organize them by categories.
@@ -30,26 +32,30 @@ A modern and intuitive to-do application built with Ruby on Rails, allowing user
 ### Setup
 
 1. Clone the repository
+
 ```bash
 git clone <repository-url>
 cd to-do
 ```
 
 2. Install dependencies
+
 ```bash
 bin/setup
 ```
 
 3. Start the development server
+
 ```bash
 bin/dev
 ```
 
-4. Visit http://localhost:3000 in your browser
+4. Visit <http://localhost:3000> in your browser
 
 ## Database Structure
 
 The application has three main models:
+
 - **User**: Manages authentication and owns tasks
 - **Todo**: Represents individual tasks belonging to users
 - **Category**: Color-coded labels that can be assigned to multiple tasks
@@ -57,6 +63,7 @@ The application has three main models:
 ## Testing
 
 Run the test suite with:
+
 ```bash
 bin/rails test
 ```
@@ -64,6 +71,7 @@ bin/rails test
 ## Deployment
 
 This application can be deployed using Docker:
+
 ```bash
 docker build -t task-manager .
 docker run -p 3000:3000 task-manager
@@ -72,3 +80,4 @@ docker run -p 3000:3000 task-manager
 ## License
 
 This project is open source under the MIT license.
+
