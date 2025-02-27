@@ -17,7 +17,7 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    
+
     <script>
       // Add simple toggle functionality when JS is enabled
       document.addEventListener('DOMContentLoaded', () => {
@@ -42,63 +42,125 @@
               <a href="/todos/new" class="px-3 py-2 rounded hover:bg-blue-500">New Task</a>
               <a href="/categories" class="px-3 py-2 rounded hover:bg-blue-500">Categories</a>
             </nav>
-            
+
             <% if user_signed_in? %>
               <div class="relative" data-controller="dropdown">
-                <button data-action="click->dropdown#toggle" class="flex items-center space-x-2 focus:outline-none">
+                <button
+                  data-action="click->dropdown#toggle"
+                  class="flex items-center space-x-2 focus:outline-none"
+                >
                   <div class="w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center">
                     <span class="text-sm font-medium"><%= current_user.initials %></span>
                   </div>
                   <span class="hidden md:inline-block"><%= current_user.name %></span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
                   </svg>
                 </button>
-                <div data-dropdown-target="menu" class="absolute right-0 mt-2 w-48 py-1 bg-white rounded-md shadow-lg hidden z-10">
-                  <%= link_to "Edit Profile", edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <div
+                  data-dropdown-target="menu"
+                  class="
+                    absolute right-0 mt-2 w-48 py-1 bg-white rounded-md shadow-lg hidden z-10
+                  "
+                >
+                  <%= link_to "Edit Profile",
+                  edit_user_registration_path,
+                  class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
                   <div class="border-t border-gray-100"></div>
-                  <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= button_to "Sign Out",
+                  destroy_user_session_path,
+                  method: :delete,
+                  class:
+                    "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
                 </div>
               </div>
             <% else %>
               <div class="flex space-x-2">
-                <%= link_to "Sign In", new_user_session_path, class: "px-3 py-2 rounded border border-white text-white hover:bg-white hover:text-blue-600" %>
-                <%= link_to "Sign Up", new_user_registration_path, class: "px-3 py-2 rounded bg-white text-blue-600 hover:bg-blue-100" %>
+                <%= link_to "Sign In",
+                new_user_session_path,
+                class:
+                  "px-3 py-2 rounded border border-white text-white hover:bg-white hover:text-blue-600" %>
+                <%= link_to "Sign Up",
+                new_user_registration_path,
+                class: "px-3 py-2 rounded bg-white text-blue-600 hover:bg-blue-100" %>
               </div>
             <% end %>
           </div>
         </div>
       </div>
     </header>
-    
+
     <main class="container mx-auto py-6 px-5">
       <% if notice %>
-        <div class="mb-4 p-4 bg-green-50 rounded-md text-green-600 flex items-start justify-between">
+        <div
+          class="
+            mb-4 p-4 bg-green-50 rounded-md text-green-600 flex items-start justify-between
+          "
+        >
           <div><%= notice %></div>
-          <button class="ml-4 text-green-500 hover:text-green-800" onclick="this.parentElement.remove()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          <button
+            class="ml-4 text-green-500 hover:text-green-800"
+            onclick="this.parentElement.remove()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
             </svg>
           </button>
         </div>
       <% end %>
-      
+
       <% if alert %>
-        <div class="mb-4 p-4 bg-red-50 rounded-md text-red-600 flex items-start justify-between">
+        <div
+          class="
+            mb-4 p-4 bg-red-50 rounded-md text-red-600 flex items-start justify-between
+          "
+        >
           <div><%= alert %></div>
-          <button class="ml-4 text-red-500 hover:text-red-800" onclick="this.parentElement.remove()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          <button
+            class="ml-4 text-red-500 hover:text-red-800"
+            onclick="this.parentElement.remove()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
             </svg>
           </button>
         </div>
       <% end %>
-      
+
       <%= yield %>
     </main>
-    
+
     <footer class="mt-auto py-4 text-center text-gray-500 text-sm">
-      <p>Todo App © <%= Date.today.year %> | Made with Ruby on Rails and Tailwind CSS</p>
+      <p>Todo App Made by BanioBits &copy;
+        <%= Date.today.year %>
+        | Made with Ruby on Rails and Tailwind CSS</p>
     </footer>
   </body>
 </html>
